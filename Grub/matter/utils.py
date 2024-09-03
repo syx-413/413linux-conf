@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 from subprocess import run, PIPE
 from shutil import which
 
