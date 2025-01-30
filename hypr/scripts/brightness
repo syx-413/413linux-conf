@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Notify
+notify_user() {
+  local brightness
+  brightness=$(printf "%.0f\n" $(brightnessctl g))
+  notify-send -h string:x-canonical-private-synchronous:sys-notify -u low "Brightness : $brightness"
+}
+
+# Increase brightness
+inc_backlight() {
+  brightnessctl s +5% && notify_user
+}
+
+# Decrease brightness
+dec_backlight() {
+  brightnessctl s 5%- && notify_user
+}
+
+# Execute accordingly
+case "$1" in
+"--get")
+  printf "%.0f\n" $(brightnessctl g)
+  ;;
+"--inc")
+  inc_backlight
+  ;;
+"--dec")
+  dec_backlight
+  ;;
+*)
+  printf "%.0f\n" $(brightnessctl g)
+  ;;
+esac

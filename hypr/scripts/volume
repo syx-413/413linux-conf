@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+# Get Volume
+get_volume() {
+  pamixer --get-volume
+}
+
+# Notify
+notify() {
+  local message
+  if [[ "$1" == "volume" ]]; then
+    message="Volume: $(get_volume)%"
+  elif [[ "$1" == "mic" ]]; then
+    message="Mic Level: $(pamixer --default-source --get-volume)%"
+  elif [[ "$1" == "mute" ]]; then
+    message="Volume Switched OFF"
+  elif [[ "$1" == "unmute" ]]; then
+    message="Volume Switched ON"
+  elif [[ "$1" == "mic-mute" ]]; then
+    message="Microphone Switched OFF"
+  elif [[ "$1" == "mic-unmute" ]]; then
+    message="Microphone Switched ON"
+  else
+    message="Unknown"
+  fi
+  notify-send -h string:x-canonical-private-synchronous:sys-notify -u low "$message"
+}
+
+# Increase Volume
+inc_volume() {
+  pamixer -i 5 && notify volume
+}
+
+# Decrease Volume
+dec_volume() {
+  pamixer -d 5 && notify volume
+}
+
+# Toggle Mute
+toggle_mute() {
+  pamixer -t
+  if [ "$(pamixer --get-mute)" == "true" ]; then
+    notify mute
+  else
+    notify unmute
+  fi
+}
+
+# Toggle Mic
+toggle_mic() {
+  pamixer --default-source -t
+  if [ "$(pamixer --default-source --get-mute)" == "true" ]; then
+    notify mic-mute
+  else
+    notify mic-unmute
+  fi
+}
+# Increase MIC Volume
+inc_mic_volume() {
+  pamixer --default-source -i 5 && notify mic
+}
+# Decrease MIC Volume
+dec_mic_volume() {
+  pamixer --default-source -d 5 && notify mic
+}
+# Execute accordingly
+case "$1" in
+"--get")
+  get_volume
+  ;;
+"--inc")
+  inc_volume
+  ;;
+"--dec")
+  dec_volume
+  ;;
+"--toggle")
+  toggle_mute
+  ;;
+"--toggle-mic")
+  toggle_mic
+  ;;
+"--mic-inc")
+  inc_mic_volume
+  ;;
+"--mic-dec")
+  dec_mic_volume
+  ;;
+*)
+  get_volume
+  ;;
+esac
