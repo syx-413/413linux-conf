@@ -51,8 +51,8 @@ tooltip label {
 
 #workspaces button:hover {
   transition: all .1s;
-  color: #E8A2AF;
-  border-color: #E8A2AF;
+  color: #e8a2af;
+  border-color: #16a2af;
 }
 
 #mode, #battery {
@@ -74,7 +74,7 @@ tooltip label {
 }
 
 #custom-lyrics{
-  font-family:"LXGWNeoZhiSong","LXGWWenKai";
+  font-family:"LXGWNeoZhiSong";
   font-size: 14px;
   background-color:rgba(30,215,96,0.7);
   color:black;

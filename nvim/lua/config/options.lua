@@ -5,3 +5,9 @@
 vim.opt.relativenumber = false
 
 vim.o.background = "light"
+
+-- for hyprlang
+vim.filetype.add({
+  pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+})
+---
