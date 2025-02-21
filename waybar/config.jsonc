@@ -1,18 +1,18 @@
 // -*- mode: jsonc -*-
 {
-    // "layer": "top", // Waybar at top layer
+    // "layer": "bottom", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
+    // "height":, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces",
         "tray",
-        "custom/lyrics",
-        "custom/netease"
+        "custom/waylrc"
+        // "custom/lyrics",
+        // "custom/netease"
         // "hyprland/scratchpad",
-        // "custom/lyrics"
     ],
     "modules-center": [
         "hyprland/window"
@@ -21,52 +21,82 @@
     "modules-right": [
         // "mpd",
         // "idle_inhibitor",
-        "network",
-        "memory",
+        // "cava", 
+        "mpris",
+        "network",   
         "pulseaudio",
+        "memory",
         "cpu",
-        "backlight",
+        // "backlight",
         // "keyboard-state",
         // "sway/language",
-        "temperature",
+        "temperature",    
         "battery",
         // "battery#bat2",
         "clock"
         // "tray",
         // "custom/power"
     ],
-    //---------------------------------------------//
-    "custom/lyrics": {
-        "exec": "~/.config/waybar/scripts/lyric.bash",
-        "format": "{}",
-        "interval": 1,
-        // "tooltip": false,
-        "on-click": "playerctl play-pause"
+//---------------------------------------------//
+      "custom/waylrc": {
+        "exec": "~/.local/bin/waylrc",
+        "return-type": "json",
+        "escape": true
     },
-    "custom/netease": {
-        "exec": "/home/s413/.config/waybar/scripts/netease.sh",
-        "format": "{}",
-        "interval": 1,
-        // "tooltip": false,
-        "on-click": "playerctl play-pause"
-    },
-    // Modules configuration
-    // "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "warp-on-scroll": false,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "urgent": "",
-    //         "focused": "",
-    //         "default": ""
-    //     }
+    // "custom/lyrics":{
+    //     "exec": "~/.config/waybar/scripts/lyric.bash",
+    //     "format": "  {}",
+    //     "interval": 2,
+    //     // "tooltip": false,
+    //     // "on-click": "playerctl play-pause"  
     // },
+    // "custom/netease":{
+    //     "exec": "/home/s413/.config/waybar/scripts/netease.sh",
+    //     "format":"{}  ",
+    //     "interval": 100,
+    //     // "tooltip": false,
+    //     // "on-click": "playerctl play-pause"  
+    // },
+
+    "mpris": {
+        "max-length": 40,
+        // "interval": 20,
+        "dynamic-order": [
+        // "artist",
+        "title"
+      ],
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "  {status_icon} <i>{dynamic}</i>",
+    "status-icons": {
+      "paused": ""
+     },
+      "player-icons": {
+        "default": ""
+      }
+    },
+  // --------------------------------------------------/
+  // "cava": {
+  //       "cava_config": "/home/s413/.config/cava/config",
+  //       "framerate": 30,
+  //       "autosens": 1,
+  //       "sensitivity": 100,
+  //       "bars": 14,
+  //       "lower_cutoff_freq": 50,
+  //       "higher_cutoff_freq": 10000,
+  //       "method": "PipeWire",
+  //       "source": "auto",
+  //       "stereo": true,
+  //       "reverse": false,
+  //       "bar_delimiter": 0,
+  //       "monstercat": false,
+  //       "waves": false,
+  //       "noise_reduction": 0.77,
+  //       "input_delay": 4,
+  //       "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+  //       "actions": {
+  //                  "on-click-right": "mode"
+  //                  }
+  //   },
     // "keyboard-state": {
     //     "numlock": true,
     //     "capslock": true,
@@ -112,34 +142,27 @@
     //     "tooltip-format": "MPD (connected)",
     //     "tooltip-format-disconnected": "MPD (disconnected)"
     // },
-    // "idle_inhibitor": {
-    //     "format": "{icon}",
-    //     "format-icons": {
-    //         "activated": "",
-    //         "deactivated": ""
-    //     }
-    // },
     "tray": {
         // "icon-size": 21,
         "spacing": 10
     },
-    "clock": {
+   "clock": {
         "interval": 1,
         "format": "\uf017 {:%H:%M}",
         "format-alt": "\uf133 {:%m-%d }",
         "tooltip-format": "<tt>{calendar}</tt>",
-        "timezone": "Asia/Chongqing",
+		    "timezone": "Asia/Chongqing",
         "calendar": {
-            "mode": "month",
-            "mode-mon-col": 3,
-            "weeks-pos": "right",
-            "on-scroll": 1,
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
             "format": {
-                "months": "<span color='#ffead3'>{}</span>",
-                "days": "<span color='#ecc6d9'>{}</span>",
-                "weeks": "<span color='#99ffdd'>W{}</span>",
-                "weekdays": "<span color='#ffcc66'>{}</span>",
-                "today": "<span color='#ff6699'><u>{}</u></span>"
+                "months":     "<span color='#ffead3'>{}</span>",
+                "days":       "<span color='#ecc6d9'>{}</span>",
+                "weeks":      "<span color='#99ffdd'>W{}</span>",
+                "weekdays":   "<span color='#ffcc66'>{}</span>",
+                "today":      "<span color='#ff6699'><u>{}</u></span>"
             }
         },
         "actions": {
@@ -150,52 +173,42 @@
             "on-scroll-down": "shift_down"
         }
     },
-    "cpu": {
-        "interval": 1,
-        "format": "{icon0}",
-        "format-icons": [
-            "<span color='#69ff94'>▁</span>", // green
-            "<span color='#2aa9ff'>▂</span>", // blue
-            "<span color='#f8f8f2'>▃</span>", // white
-            "<span color='#f8f8f2'>▄</span>", // white
-            "<span color='#ffffa5'>▅</span>", // yellow
-            "<span color='#ffffa5'>▆</span>", // yellow
-            "<span color='#ff9977'>▇</span>", // orange
-            "<span color='#dd532e'>█</span>" // red
-        ]
-    },
+   "cpu": {
+     "interval": 1,
+     "format": "{icon0}",
+     "format-icons": [
+          "<span color='#69ff94'>▁</span>", // green
+          "<span color='#2aa9ff'>▂</span>", // blue
+          "<span color='#f8f8f2'>▃</span>", // white
+          "<span color='#f8f8f2'>▄</span>", // white
+          "<span color='#ffffa5'>▅</span>", // yellow
+          "<span color='#ffffa5'>▆</span>", // yellow
+          "<span color='#ff9977'>▇</span>", // orange
+          "<span color='#dd532e'>█</span>"  // red
+     ]
+  },
     "memory": {
-        "interval": 30,
-        "format": "{used:0.1f}G "
-    },
-    "temperature": {
+    "interval": 30,
+    "format": ""
+  },
+  "temperature": {
         // "thermal-zone": 2,
         "hwmon-path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon4/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{icon} {temperatureC}°C",
+        "format": "{icon}",
         "format-icons": [
-            "",
-            "",
-            ""
-        ]
-    },
+          "", 
+          "", 
+          "<span color='#dd532e'></span>"  // red
+    ]
+  },
     "backlight": {
         // "device": "acpi_video1",
         "format": "{icon} ",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-        ]
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
-    "battery": {
+  "battery": {
         "bat": "BAT0",
         "interval": 3,
         "states": {
@@ -205,18 +218,34 @@
         },
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% 󰂄",
-        "format-plugged": "{capacity}% 󰂄 ",
+        "format-plugged": "{capacity}% 󰂄 ",
         "format-icons": [
-            "󰁻",
-            "󰁼",
-            "󰁾",
-            "󰂀",
-            "󰂂",
-            "󰁹"
-        ],
+          "<span color='#dd532e'>󰁻</span>", // green
+          "<span color='#2aa9ff'>󰁼</span>", // blue
+          "󰁾",
+          "󰂀",          
+          "<span color='#ffffa5'>󰂂</span>", // yellow
+          "󰂄"  // red
+            ],
         // "format-alt": " {power}"
         "tooltip-format": "{power}W"
-    },
+  },
+
+    // "battery": {
+    //     "states": {
+    //         // "good": 95,
+    //         "warning": 30,
+    //         "critical": 15
+    //     },
+    //     "format": "{capacity}% {icon}",
+    //     "format-full": "{capacity}% {icon}",
+    //     "format-charging": "{capacity}% ",
+    //     "format-plugged": "{capacity}% ",
+    //     "format-alt": "{time} {icon}",
+    //     // "format-good": "", // An empty format will hide the module
+    //     // "format-full": "",
+    //     "format-icons": ["", "", "", "", ""]
+    // },
     //
     // "power-profiles-daemon": {
     //   "format": "{icon}",
@@ -230,85 +259,95 @@
     //   }
     // },
     "network": {
-        "interval": 1,
-        "format-wifi": "{bandwidthDownBytes}  ",
-        "format-ethernet": "",
-        "format-disconnected": "",
-        "tooltip-format-disconnected": "Error",
-        "tooltip-format": "{ifname}: {ipaddr}/{cidr}, Gateway: {gwaddr}",
-        "on-click": "kitty nmtui"
+            "interval": 2,
+            "format-wifi": " {bandwidthDownBytes}",
+            // "format-wifi": "  {bandwidthUpBytes}  {bandwidthDownBytes}",
+            "format-ethernet":"  ",
+            "format-disconnected": "<span color='#dd532e'> </span> ",
+            "tooltip-format-disconnected": "Error",
+            "tooltip-format": "{ifname},{essid}({ipaddr})  {bandwidthUpBytes}  {bandwidthDownBytes}",
+            "on-click": "kitty nmtui"
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}%  ",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " ",
-        "format-source": " {volume}%",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": [
-                "",
-                "",
-                ""
-            ]
-        },
-        "on-click": "pavucontrol"
-    },
-    //   "custom/power": {
-    //       "format" : "⏻ ",
-    // "tooltip": false,
-    // "menu": "on-click",
-    // "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-    // "menu-actions": {
-    // 	"shutdown": "shutdown",
-    // 	"reboot": "reboot",
-    // 	"suspend": "systemctl suspend",
-    // 	"hibernate": "systemctl hibernate"
-    // }
-    //   },
+      "format": "{icon}{volume}%",
+      "format-muted": " ",
+      "format-icons": {
+        "default": [
+          " "
+        ]
+      },
+      "on-click": "pavucontrol"
+  },
+    // "pulseaudio": {
+    //     // "scroll-step": 1, // %, can be a float
+    //     "format": "{volume}%  ",
+    //     "format-bluetooth": "{volume}% {icon} {format_source}",
+    //     "format-bluetooth-muted": " {icon} {format_source}",
+    //     "format-muted": "",
+    //     "format-source": " {volume}%",
+    //     "format-source-muted": "",
+    //     "format-icons": {
+    //         "headphone": "",
+    //         "hands-free": "",
+    //         "headset": "",
+    //         "phone": "",
+    //         "portable": "",
+    //         "car": "",
+    //         "default": ["", "", ""]
+    //     },
+    //     "on-click": "pavucontrol"
+    // },
+		//   "custom/power": {
+		//       "format" : "⏻ ",
+		// "tooltip": false,
+		// "menu": "on-click",
+		// "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+		// "menu-actions": {
+		// 	"shutdown": "shutdown",
+		// 	"reboot": "reboot",
+		// 	"suspend": "systemctl suspend",
+		// 	"hibernate": "systemctl hibernate"
+		// }
+		//   },
     "hyprland/workspaces": {
         "active-only": false,
         "disable-scroll": true,
         // "format": "{name}",
         "format": "{icon}",
         "format-icons": {
-            "1": "壹",
-            "2": "贰",
-            "3": "叁",
-            "4": "肆",
-            "5": "伍",
-            "6": "陆",
-            "7": "柒",
-            "8": "捌",
-            "9": "玖",
-            "10": "拾"
-            // "active": "",
-            // "default": ""
+          "1": "壹",
+          "2": "贰",
+          "3": "叁",
+          "4": "肆",
+          "5": "伍",
+          "6": "陆",
+          "7": "柒",
+          "8": "捌",
+          "9": "玖",
+          "10": "拾"
+          // "active": "",
+          // "default": ""
         },
         "persistent_workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": [],
-            "10": []
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": [],
+          "6": [],
+          "7": [],
+          "8": [],
+          "9": [],
+          "10": []
         }
     },
-    "hyprland/window": {
-        "format": "\uf105 {initialTitle}",
-        "separate-outputs": true
-    },
+  // "hyprland/window": {
+  //       "format": "\uf105 {initialTitle}",
+  //       "separate-outputs": true
+  //   },
+  "hyprland/window": {
+    "format": "{initialTitle}"
+  },
     // "hyprland/window": {
     //     "format": "{}",
     //     "rewrite": {
