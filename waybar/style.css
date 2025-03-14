@@ -1,7 +1,7 @@
 /* --- 全局样式 --- */
 * {
     min-height: 0;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 /* Waybar 窗口主样式 */
@@ -32,6 +32,8 @@ tooltip {
 
 tooltip label {
     color: white;
+    font-family: "LXGWZhiSongMN";
+    font-size: 14px;
 }
 
 /* --- 模块通用样式 --- */
@@ -41,7 +43,9 @@ tooltip label {
 #mode,
 #battery,
 #pulseaudio,
+#network,
 #cpu,
+#custom-gpu, 
 #memory,
 #temperature,
 #mpris,
@@ -62,15 +66,15 @@ tooltip label {
 #tray {
     padding-top: 2px;        /* 垂直方向内边距 */
     padding-bottom: 0px;     /* 垂直方向内边距 */
-    /* font-size: 12px;  可根据需要启用 */
+    font-size: 16px;  /*可根据需要启用*/
 }
 
 /* --- Workspaces 模块样式 --- */
 #workspaces button {
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     margin-right: 2px;        /* 模块右外边距 */
     margin-left: 0px;         /* 模块左外边距 */
-    margin-top: 4px;          /* 模块上外边距 */
+    margin-top: 2px;          /* 模块上外边距 */
     margin-bottom: 0px;       /* 模块下外边距 */
     padding: 6px 8px;
     border-radius: 10px;
@@ -80,7 +84,7 @@ tooltip label {
     color: #b5e872;
     /*background:transparent;*/
     background: rgba(78, 78, 78, 0.65);
-    font-family: "LXGWNeoZhiSong";
+    font-family:"LXGWZhiSongMN";
     font-weight: bold;
     transition: all 0.5s;
 }
@@ -105,24 +109,32 @@ tooltip label {
 
 /* --- Battery 模块样式 --- */
 #battery {
-    background-color: rgba(253, 245, 230,0.5);
+    background-color: rgba(253, 245, 230,0.6);
+    font-family: "LXGWWenKai"; 
     color: black;
-    font-family: "LXGWWenKai"; /* 统一字体 */
 }
 
 #battery.charging {
-    background-color: #26A65B;
-    color: white;
+    background-color: rgba(38,166,91,0.6);
+    color:white;
+}
+
+#battery.discharging {
+    background-color: rgba(253,238,15,0.65);
+    color: black;
 }
 
 #battery.warning:not(.charging) {
     background: #f53c3c;
     color: white;
     animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
+    animation-duration: 3.0s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+#battery.full {
+    background-color: #26A65B;
+    color: white;
 }
 
 @keyframes blink {
@@ -135,8 +147,8 @@ tooltip label {
 /* --- Clock 模块样式 --- */
 #clock {
     background-color: rgba(179, 26, 128,0.6);
-    color: black;
-    font-family: "LXGWWenKai"; /* 统一字体 */
+    /*color: black;*/
+    /*font-family: "LXGWWenKai";*/
 }
 
 /* --- Window 模块样式 --- */
@@ -156,17 +168,17 @@ tooltip label {
 
 /* --- MPris 模块样式 --- */
 #mpris {
-    color: #DEC9BC;
-    font-family: "LXGWWenKai"; /* 统一字体 */
-    /*background-color: rgba(0, 0, 0, 0.5);*/
+    /*color: #DEC9BC;*/
+  color:rgb(205, 245, 100) ;
+  background-color: rgba(0, 0, 0, 0.35);
 }
 
 /* --- Custom-lyrics 模块样式 --- */
 #custom-lyrics {
     background-color: rgba(30, 215, 96, 0.7);
     color: black;
-    font-family: "LXGWNeoZhiSong";
-    font-size: 16px;
+    font-family: "LXGWZhiSongMN";
+    font-size: 15px;
     margin: 3px 5px; /* 微调外边距，覆盖通用样式 */
     padding: 4px 8px; /* 微调内边距，覆盖通用样式 */
     border-radius: 12px; /* 覆盖通用圆角 */
@@ -187,24 +199,49 @@ tooltip label {
 
 #temperature{
 }
-
-#tray{
-  background-color: rgba(249, 245, 93,0.5);
+/*------------*/
+#custom-gpu,
+#cpu{
+  /*background-color:rgba(255, 198, 101,0.5);*/
+  /*color:black;*/
 }
-/* --- 模块字体样式 --- */
+#network{
+  /*background-color:rgba(205, 245, 100,0.6);*/
+  /*color:black;*/
+}
+#tray{
+  background-color:rgba(255, 240, 240,0.6);
+}
+#tray menu{
+    background-color: rgba(18, 18, 18, 0.5);
+    border: 1px solid rgba(34, 34, 34, 0.5);
+    border-radius: 8px;
+    color:white;
+}
+/*#tray > .passive{*/
+/*  background-color:rgba(111 ,120, 206,0.6);*/
+/*}*/
+/*#tray > .active{*/
+/*  color:#303C18;*/
+/*}*/
+
+ /* --- 模块字体样式 --- */
 /* 将字体设置统一放在一起，方便管理 */
 #pulseaudio,
+#network, 
 #cpu,
+#custom-gpu,
 #memory,
 #temperature,
 #battery,
 #clock,
+#tray,
 #mpris {
-    font-family: "LXGWWenKai"; /* 统一使用 "LXGWWenKai" 字体 */
+    font-family: "LXGWWenKai"; 
 }
 
-#workspaces button,
-#custom-lyrics,
-#custom-netease {
-    font-family: "LXGWNeoZhiSong"; /* 统一使用 "LXGWNeoZhiSong" 字体 */
-}
+/*#workspaces button,*/
+/*#custom-lyrics,*/
+/*#custom-waylrc {*/
+/*font-family: "LXGWNeoZhiSong"; */
+/*}*/

@@ -27,13 +27,14 @@ config.window_frame = {
 	-- font = font(font_primary, { bold = true }),
 	font_size = 7,
 }
-config.font = wezterm.font("Maple Mono NF CN", { weight = "Light", stretch = "Normal", style = "Normal" })
 config.font_size = 12
+config.font = wezterm.font("Maple Mono", { weight = "Regular", stretch = "Normal", style = "Normal" })
+-- config.font = wezterm.font("Maple Mono", { weight = "ExtraLight", stretch = "Normal", style = "Normal" })
 
 -- 默认 shell
 config.default_prog = { "/usr/bin/fish" }
 
-config.window_background_opacity = 0.74
+config.window_background_opacity = 0.64
 config.window_padding = {
 	left = 20,
 	right = 20,

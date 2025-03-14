@@ -1,6 +1,7 @@
 return {
   "chrisgrieser/nvim-rip-substitute",
   event = "VeryLazy",
+
   keys = {
     {
       "g/",

@@ -16,10 +16,14 @@ return {
       opts = { lazy_load = true },
     },
   },
-  "nvim-treesitter/nvim-treesitter",
-  opts = {
-    ensure_installed = {
-      "hyprlang",
+  {
+    "nvim-treesitter/nvim-treesitter",
+    event = "VeryLazy",
+    ft = "*.conf",
+    opts = {
+      ensure_installed = {
+        "hyprlang",
+      },
     },
   },
 }

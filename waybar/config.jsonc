@@ -2,39 +2,34 @@
 {
     // "layer": "bottom", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    // "height":, // Waybar height (to be removed for auto height)
+    "height":34, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces",
         "tray",
-        "custom/waylrc"
-        // "custom/lyrics",
-        // "custom/netease"
+        "custom/waylrc",
+        "custom/lyrics"
         // "hyprland/scratchpad",
     ],
     "modules-center": [
         "hyprland/window"
-        // "sway/window"
     ],
     "modules-right": [
         // "mpd",
-        // "idle_inhibitor",
         // "cava", 
         "mpris",
         "network",   
-        "pulseaudio",
+        // "pulseaudio",
         "memory",
-        "cpu",
+        "cpu", 
+        "custom/gpu" ,
         // "backlight",
-        // "keyboard-state",
-        // "sway/language",
-        "temperature",    
+        // "temperature",    
         "battery",
         // "battery#bat2",
         "clock"
-        // "tray",
         // "custom/power"
     ],
 //---------------------------------------------//
@@ -43,21 +38,20 @@
         "return-type": "json",
         "escape": true
     },
-    // "custom/lyrics":{
-    //     "exec": "~/.config/waybar/scripts/lyric.bash",
-    //     "format": "  {}",
-    //     "interval": 2,
-    //     // "tooltip": false,
-    //     // "on-click": "playerctl play-pause"  
-    // },
-    // "custom/netease":{
-    //     "exec": "/home/s413/.config/waybar/scripts/netease.sh",
-    //     "format":"{}  ",
-    //     "interval": 100,
-    //     // "tooltip": false,
-    //     // "on-click": "playerctl play-pause"  
-    // },
 
+    "custom/lyrics":{
+        "exec": "/usr/bin/sptlrx pipe",
+        "format": "{}",
+        // "tooltip": false,
+        // "on-click": "playerctl play-pause"  
+    },
+    "custom/gpu": {
+      "format": "{} {icon}",
+      "exec": "gpu-usage-waybar",
+      "return-type": "json",
+      // "format-icons": "󰾲",
+      "on-click": "kitty nvtop",
+    },
     "mpris": {
         "max-length": 40,
         // "interval": 20,
@@ -97,25 +91,7 @@
   //                  "on-click-right": "mode"
   //                  }
   //   },
-    // "keyboard-state": {
-    //     "numlock": true,
-    //     "capslock": true,
-    //     "format": "{name} {icon}",
-    //     "format-icons": {
-    //         "locked": "",
-    //         "unlocked": ""
-    //     }
-    // },
-    // "sway/mode": {
-    //     "format": "<span style=\"italic\">{}</span>"
-    // },
-    // "sway/scratchpad": {
-    //     "format": "{icon} {count}",
-    //     "show-empty": false,
-    //     "format-icons": ["", ""],
-    //     "tooltip": true,
-    //     "tooltip-format": "{app}: {title}"
-    // },
+ 
     // "mpd": {
     //     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
     //     "format-disconnected": "Disconnected ",
@@ -142,11 +118,13 @@
     //     "tooltip-format": "MPD (connected)",
     //     "tooltip-format-disconnected": "MPD (disconnected)"
     // },
-    "tray": {
+  
+"tray": {
         // "icon-size": 21,
         "spacing": 10
-    },
-   "clock": {
+},
+
+"clock": {
         "interval": 1,
         "format": "\uf017 {:%H:%M}",
         "format-alt": "\uf133 {:%m-%d }",
@@ -163,19 +141,20 @@
                 "weeks":      "<span color='#99ffdd'>W{}</span>",
                 "weekdays":   "<span color='#ffcc66'>{}</span>",
                 "today":      "<span color='#ff6699'><u>{}</u></span>"
-            }
-        },
+          }
+      },
         "actions": {
             "on-click-right": "mode",
             "on-click-forward": "tz_up",
             "on-click-backward": "tz_down",
             "on-scroll-up": "shift_up",
             "on-scroll-down": "shift_down"
-        }
-    },
-   "cpu": {
-     "interval": 1,
-     "format": "{icon0}",
+      }
+},
+
+"cpu": {
+     "interval": 2,
+     "format": "{icon0} {avg_frequency:0.1f}GHz",
      "format-icons": [
           "<span color='#69ff94'>▁</span>", // green
           "<span color='#2aa9ff'>▂</span>", // blue
@@ -185,13 +164,15 @@
           "<span color='#ffffa5'>▆</span>", // yellow
           "<span color='#ff9977'>▇</span>", // orange
           "<span color='#dd532e'>█</span>"  // red
-     ]
-  },
-    "memory": {
+    ]
+},
+
+"memory": {
     "interval": 30,
-    "format": ""
-  },
-  "temperature": {
+    "format": "{used:0.1f}G "
+},
+
+"temperature": {
         // "thermal-zone": 2,
         "hwmon-path": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon4/temp1_input",
         "critical-threshold": 80,
@@ -200,14 +181,17 @@
         "format-icons": [
           "", 
           "", 
-          "<span color='#dd532e'></span>"  // red
+          "", 
+        "<span color='#dd532e'></span>"
     ]
-  },
-    "backlight": {
+},
+
+"backlight": {
         // "device": "acpi_video1",
         "format": "{icon} ",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
-    },
+},
+
   "battery": {
         "bat": "BAT0",
         "interval": 3,
@@ -218,47 +202,26 @@
         },
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% 󰂄",
-        "format-plugged": "{capacity}% 󰂄 ",
+        "format-plugged": "{capacity}% 󱟨 ",
+        "format-full": "{capacity}% {icon}",
+        "format-discharging": "{capacity}% 󱟨",
         "format-icons": [
           "<span color='#dd532e'>󰁻</span>", // green
           "<span color='#2aa9ff'>󰁼</span>", // blue
           "󰁾",
           "󰂀",          
           "<span color='#ffffa5'>󰂂</span>", // yellow
-          "󰂄"  // red
+          "󰂏"  // red
             ],
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
         // "format-alt": " {power}"
-        "tooltip-format": "{power}W"
+        "tooltip-format": "{power:0.1f}W"
   },
-
-    // "battery": {
-    //     "states": {
-    //         // "good": 95,
-    //         "warning": 30,
-    //         "critical": 15
-    //     },
-    //     "format": "{capacity}% {icon}",
-    //     "format-full": "{capacity}% {icon}",
-    //     "format-charging": "{capacity}% ",
-    //     "format-plugged": "{capacity}% ",
-    //     "format-alt": "{time} {icon}",
-    //     // "format-good": "", // An empty format will hide the module
-    //     // "format-full": "",
-    //     "format-icons": ["", "", "", "", ""]
-    // },
-    //
-    // "power-profiles-daemon": {
-    //   "format": "{icon}",
-    //   "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-    //   "tooltip": true,
-    //   "format-icons": {
-    //     "default": "",
-    //     "performance": "",
-    //     "balanced": "",
-    //     "power-saver": ""
-    //   }
-    // },
-    "network": {
+    
+  "network": {
             "interval": 2,
             "format-wifi": " {bandwidthDownBytes}",
             // "format-wifi": "  {bandwidthUpBytes}  {bandwidthDownBytes}",
@@ -267,8 +230,9 @@
             "tooltip-format-disconnected": "Error",
             "tooltip-format": "{ifname},{essid}({ipaddr})  {bandwidthUpBytes}  {bandwidthDownBytes}",
             "on-click": "kitty nmtui"
-    },
-    "pulseaudio": {
+  },
+
+  "pulseaudio": {
       "format": "{icon}{volume}%",
       "format-muted": " ",
       "format-icons": {
@@ -297,19 +261,7 @@
     //     },
     //     "on-click": "pavucontrol"
     // },
-		//   "custom/power": {
-		//       "format" : "⏻ ",
-		// "tooltip": false,
-		// "menu": "on-click",
-		// "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-		// "menu-actions": {
-		// 	"shutdown": "shutdown",
-		// 	"reboot": "reboot",
-		// 	"suspend": "systemctl suspend",
-		// 	"hibernate": "systemctl hibernate"
-		// }
-		//   },
-    "hyprland/workspaces": {
+		  "hyprland/workspaces": {
         "active-only": false,
         "disable-scroll": true,
         // "format": "{name}",
@@ -324,9 +276,7 @@
           "7": "柒",
           "8": "捌",
           "9": "玖",
-          "10": "拾"
-          // "active": "",
-          // "default": ""
+          "10": "拾" 
         },
         "persistent_workspaces": {
           "1": [],
@@ -339,29 +289,12 @@
           "8": [],
           "9": [],
           "10": []
-        }
-    },
-  // "hyprland/window": {
-  //       "format": "\uf105 {initialTitle}",
-  //       "separate-outputs": true
-  //   },
-  "hyprland/window": {
-    "format": "{initialTitle}"
+    }
   },
-    // "hyprland/window": {
-    //     "format": "{}",
-    //     "rewrite": {
-    //         "(.*) — Mozilla Firefox": "$1",
-    //         "(.*) - fish": "> [$1]"
-    //     },
-    //     // "max-length": 32,
-    //     "separate-outputs": true
-    // },
+    
+  "hyprland/window": {
+    "format": "{initialTitle}",
+    "separate-outputs": true
+
+  },
 }
-//     "jack": {
-//       "format": "DSP {}%",
-//       "format-xrun": "{xruns} xruns",
-//       "format-disconnected": "DSP off",
-//       "realtime": true
-//     }
-// 

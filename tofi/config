@@ -13,10 +13,10 @@
 	# characters not in the chosen font will fail to render.
 	#
 	# Otherwise, fonts are interpreted in Pango format.
-	# font = "Inconsolata Regular"
+	font = "LXGWWenKai"
 
 	# Point size of text.
-	font-size = 12
+	font-size = 13
 
 	# Comma separated list of OpenType font feature settings to apply,
 	# if supported by the chosen font. The format is similar to the CSS
@@ -36,7 +36,7 @@
 	#
 	# font-variations = "wght 900" (Extra bold)
 	# font-variations = "wdth 25, slnt -10" (Narrow and slanted)
-	font-variations = ""
+	font-variations = "light"
 
 	# Perform font hinting. Only applies when a path to a font has been
 	# specified via `font`. Disabling font hinting speeds up text
@@ -155,7 +155,7 @@
 	num-results = 0
 
 	# Spacing between results in pixels. Can be negative.
-	result-spacing = 0
+	result-spacing = 2
 
 	# List results horizontally.
 	horizontal = false

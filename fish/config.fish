@@ -4,6 +4,8 @@ if status is-interactive
     # Alias for 'gh copilot explain'
     alias ghce="gh copilot explain"
     alias vi nvim
+    alias pdf zathura
+    set -Ux PATH $HOME/.local/share/spotify-launcher/install/usr/share/spotify/ $PATH
 end
 if uwsm check may-start
     exec uwsm start hyprland.desktop

@@ -1,0 +1,81 @@
+sort=-time
+layer=overlay
+background-color=#22222266
+
+# SIZE
+width=450
+height=150
+padding=12,20,0
+
+# BORDER
+border-size=1
+border-color=#66ccff
+border-radius=12
+max-icon-size=64
+default-timeout=5000
+ignore-timeout=0
+
+font=ttf-lxgw-neo-xihei 12
+margin=12
+padding=12,20
+
+[urgency=low]
+border-color=#aaaaaa
+
+[urgency=normal]
+border-color=#66ccff
+
+[urgency=critical]
+border-color=#ff7777
+default-timeout=0
+
+
+[app-name="Spotify"]
+on-notify=exec true
+anchor=top-left
+default-timeout=10000
+icons=1
+width=450
+height=150
+padding=12,20,0
+
+[app-name="musicfox"]
+border-color=#ff7777
+on-notify=exec true
+anchor=top-left
+default-timeout=10000
+icons=1
+width=450
+height=150
+padding=12,20,0
+
+[app-name=hypr-vol]
+layer=overlay
+background-color=#21554294
+history=0
+anchor=bottom-center
+font=Noto Sans CJK TC 10
+default-timeout=700
+width=150
+height=80
+border-size=2
+border-color=#66ccff
+border-radius=12
+padding=8,10,2
+
+[app-name=hypr-vol-br]
+layer=overlay
+background-color=#21554294
+history=0
+
+anchor=top-center
+font=Noto Sans CJK TC 10
+default-timeout=700
+width=140
+height=100
+border-size=2
+border-color=#66ccff
+border-radius=12
+padding=10,10,2
+
+

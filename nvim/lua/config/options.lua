@@ -3,11 +3,11 @@
 -- Add any additional options here
 -- vim.opt.number = false
 vim.opt.relativenumber = false
+-- vim.o.background = "light"
 
-vim.o.background = "light"
+-- vim.o.background = "light"
 
 -- for hyprlang
 vim.filetype.add({
   pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
 })
----
