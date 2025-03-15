@@ -4,7 +4,8 @@
 notify_user() {
   local brightness
   brightness=$(printf "%.0f\n" $(brightnessctl g))
-  notify-send -h string:x-canonical-private-synchronous:sys-notify -u low "Brightness : $brightness"
+  notify-send -a "hypr-vol-br" -h string:x-canonical-private-synchronous:sys-notify "Brightness : $brightness"
+
 }
 
 # Increase brightness

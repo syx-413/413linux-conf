@@ -8,9 +8,9 @@ get_volume() {
 notify() {
   local message
   if [[ "$1" == "volume" ]]; then
-    message="Volume: $(get_volume)%"
+    message="Volume: $(get_volume)"
   elif [[ "$1" == "mic" ]]; then
-    message="Mic Level: $(pamixer --default-source --get-volume)%"
+    message="Mic Level: $(pamixer --default-source --get-volume)"
   elif [[ "$1" == "mute" ]]; then
     message="Volume Switched OFF"
   elif [[ "$1" == "unmute" ]]; then
@@ -22,7 +22,7 @@ notify() {
   else
     message="Unknown"
   fi
-  notify-send -h string:x-canonical-private-synchronous:sys-notify -u low "$message"
+  notify-send -a 'hypr-vol' -h string:x-canonical-private-synchronous:sys-notify "$message"
 }
 
 # Increase Volume
